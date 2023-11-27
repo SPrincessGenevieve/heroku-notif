@@ -1,14 +1,17 @@
 const express = require("express");
 const http = require("http");
-const socketIo = require("socket.io");
+const { Server } = require("socket.io");
+const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = new Server(server, {
+  cors: {
+    origin: "https://powerful-anchorage-14341-eeaf081b0c28.herokuapp.com",
+    methods: ["GET", "POST"],
+  },
+});
 
-const { Server } = require("socket.io");
-const cors = require("cors");
-const PORT = process.env.PORT || 3001;
 app.use(cors());
 
 io.on("connection", (socket) => {
@@ -18,6 +21,8 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("received_message", data);
   });
 });
+
+const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
