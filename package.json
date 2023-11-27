@@ -2,7 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://github.com/SPrincessGenevieve/eTCMF.git",
+  "author": "Sagrado, Princess Genevieve <xhanhime@gmai.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
