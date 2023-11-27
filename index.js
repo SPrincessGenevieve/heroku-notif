@@ -1,18 +1,18 @@
 const express = require("express");
+const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 
-const app = express();
+app.use(cors());
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://powerful-anchorage-14341-eeaf081b0c28.herokuapp.com",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
-
-app.use(cors());
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
@@ -22,8 +22,6 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 3001;
-
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+server.listen(3001, () => {
+  console.log("SERVER IS RUNNING");
 });
